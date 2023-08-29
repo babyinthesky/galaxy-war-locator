@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { SECRET_URL } from '../config';
 import LocaterMap from './LocatorMap';
+import LoadingSpinner from './LoadingSpinner';
 
 const MainPage = () => {
   const [errorText, setErrorText] = useState('');
@@ -26,11 +27,11 @@ const MainPage = () => {
     });
   }, []);
 
-  // if (isLoading) {
-  //     return (
-  //       <LoadingSpinner />
-  //     );
-  // }
+  if (isLoading) {
+      return (
+        <LoadingSpinner />
+      );
+  }
 
   return (
     <div className="flex flex-col flex-1 flex-wrap min-h-[80%] w-full content-center">
