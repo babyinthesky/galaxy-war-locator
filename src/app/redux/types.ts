@@ -1,0 +1,2 @@
+export const MEMBER_SHORT_LIST = 'MEMBER_SHORT_LIST';
+export const GET_ERROR = 'GET_ERROR';
