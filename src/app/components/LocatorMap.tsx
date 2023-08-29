@@ -1,4 +1,3 @@
-
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 const Map = () => {

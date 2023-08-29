@@ -2,8 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { SECRET_URL } from '../config';
-import LocaterMap from './LocatorMap';
 import LoadingSpinner from './LoadingSpinner';
+import dynamic from 'next/dynamic';
+
+// To eliminate the error: 'ReferenceError: window is not defined'
+const LocaterMap = dynamic(() => import('./LocatorMap'), { ssr: false })
 
 const MainPage = () => {
   const [errorText, setErrorText] = useState('');
