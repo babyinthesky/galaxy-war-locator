@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getDataPrefixUrl } from '../../config';
 import Image from 'next/image';
+import { BsFillPersonVcardFill, BsGenderMale, BsGenderFemale } from 'react-icons/bs';
+import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
+import MemberCardTextLine from './MemberCardTextLine';
 
 const AVATAR_SIZE = 70;
 
@@ -62,10 +65,23 @@ const MemberCard = ({ id } : Props) => {
         />
       </div>
       <div className="ml-3 text-slate-300 flex flex-col">
-        <span>{memberInfo.name}</span>
-        <span>{memberInfo.gender}</span>
-        <span>{memberInfo.species}</span>
-        <span>{memberInfo.homeworld}</span>
+        <MemberCardTextLine
+          text={memberInfo.name}
+          icon={<BsFillPersonVcardFill />}
+        />
+        {memberInfo.gender === 'male' ? (
+          <BsGenderMale />
+        ) : (
+          <BsGenderFemale />
+        )}
+        <MemberCardTextLine
+          text={memberInfo.species}
+          icon={<MdPersonSearch />}
+        />
+        <MemberCardTextLine
+          text={memberInfo.homeworld}
+          icon={<MdOutlineHome />}
+        />
       </div>
     </div>
   )
