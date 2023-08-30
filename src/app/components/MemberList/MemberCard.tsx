@@ -3,6 +3,8 @@ import axios from 'axios';
 import { getDataPrefixUrl } from '../../config';
 import Image from 'next/image';
 
+const AVATAR_SIZE = 70;
+
 interface Props {
   id: string;
 }
@@ -18,6 +20,8 @@ type DetailedInfo = {
   image: string;
   born: string;
   died: string;
+  diedLocation: string;
+  species: string;
 }
 
 const MemberCard = ({ id } : Props) => {
@@ -42,16 +46,27 @@ const MemberCard = ({ id } : Props) => {
   }
 
   return (
-    <div className="h-50, w-100">
-      <Image
-        src={memberInfo.image}
-        className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          alt="Next.js Logo"
-          width={50}
-          height={50}
+    <div 
+      className="flex flex-row bg-gray-800 rounded-lg px-2 py-4
+      shadow-gray-500 shadow-sm
+      hover:shadow-cyan-500/50 hover:shadow-lg"
+    >
+      <div className={`rounded-full h-[${AVATAR_SIZE}px] overflow-hidden`}>
+        <Image
+          src={memberInfo.image}
+          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+          alt={memberInfo.name}
           priority
-      />
-      <span>{memberInfo.name}</span>
+          width={AVATAR_SIZE}
+          height={AVATAR_SIZE}
+        />
+      </div>
+      <div className="ml-3 text-slate-300 flex flex-col">
+        <span>{memberInfo.name}</span>
+        <span>{memberInfo.gender}</span>
+        <span>{memberInfo.species}</span>
+        <span>{memberInfo.homeworld}</span>
+      </div>
     </div>
   )
 }
