@@ -1,12 +1,10 @@
-import { divIcon } from "leaflet";
-import { Marker, Tooltip } from "react-leaflet";
+import React, { useRef, useEffect } from 'react';
+import { divIcon, Marker as MarkerType } from "leaflet";
+import { Marker } from "react-leaflet";
 import personFilledMarker from '../../svgs/location-person-filled';
-
-type MarkerData = {
-  id: string;
-  lat: number,
-  long: number,
-}
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectHighlightedMemberId } from "@/app/redux/slices/userEventDataSlice";
+import MarkerTooltip, { MarkerData } from './MarkerTooltip';
 
 interface Props {
   markerData: MarkerData;
@@ -20,13 +18,31 @@ const svgIcon = divIcon({
 });
 
 const MemberLocationMarker = ({ markerData } : Props)  => {
+  const highlightedMemberId = useAppSelector(selectHighlightedMemberId);
+  const markerRef = useRef<MarkerType<any> | null>(null);
+  
+  useEffect(() => {
+    if (markerRef.current) {
+      if (markerData.id === highlightedMemberId) {
+        markerRef.current.openTooltip();
+      } else {
+        markerRef.current.closeTooltip();
+      }
+    }
+  }, [highlightedMemberId, markerRef])
+
   return (
-    <Marker position={[markerData.lat, markerData.long]} icon={svgIcon}>
-      <Tooltip>
-        {`${markerData.id}\n
-        ${markerData.lat} \n
-        ${markerData.long}`}
-      </Tooltip>
+    <Marker
+      ref={markerRef}
+      position={[markerData.lat, markerData.long]}
+      icon={svgIcon}
+      eventHandlers={{
+        mouseover: (event) => {}
+      }}
+    >
+      <MarkerTooltip
+        markerData={markerData}
+      />
     </Marker>
   )
 }

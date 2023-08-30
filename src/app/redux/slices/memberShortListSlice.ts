@@ -6,7 +6,7 @@ import { MemberShortInfo } from '../types';
 
 const initialState= {
   list: [] as MemberShortInfo[],
-  isLoading: false,
+  isLoading: true,
   hasError: false,
 }
 

@@ -27,7 +27,7 @@ const MainPage = () => {
   return (
     <div className="flex flex-col h-full flex-wrap min-h-[80%] w-full content-center">
       <h1 className="text-center text-2xl mb-2">Star Wars - Rebellion: Locator</h1>
-      <p>{hasError && 'Loading Error'}</p>
+      <p>{hasError && 'Loading Error...Please try again later'}</p>
       <LocaterMap />
       <MemberGridList />
     </div>

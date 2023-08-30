@@ -6,6 +6,9 @@ import { BsFillPersonVcardFill, BsGenderMale, BsGenderFemale } from 'react-icons
 import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MemberCardTextLine from './MemberCardTextLine';
+import { useAppDispatch } from '@/app/redux/hooks';
+import { setHighlightedMemberId } from '@/app/redux/slices/userEventDataSlice';
+import { roundDistance } from '@/app/util';
 
 const AVATAR_SIZE = 70;
 
@@ -29,23 +32,19 @@ type DetailedInfo = {
   species: string;
 }
 
-const roundDistance = (distance: number) => Number((distance/1000).toFixed(1));
-
 const MemberCard = ({ id, distance } : Props) => {
   const [memberInfo, setMemberInfo] = useState<DetailedInfo | null>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (id) {
       try{     
         axios.get(getDataPrefixUrl(id)).then((response) => {
-          console.log(response.data);
           setMemberInfo(response.data);
         });
       } catch (error) {
         console.error(error);
       }
-    }
-  }, [id])
+  }, [])
 
   if (!memberInfo) {
     return null;
@@ -60,6 +59,10 @@ const MemberCard = ({ id, distance } : Props) => {
       onMouseEnter={() => {
         console.log('over', id);
         // TODO: update highlighted member id
+        dispatch(setHighlightedMemberId(id));
+      }}
+      onMouseLeave={() => {
+        dispatch(setHighlightedMemberId(''));
       }}
     >
       <div className={`rounded-full h-[70px] overflow-hidden`}>
