@@ -36,9 +36,6 @@ const MemberLocationMarker = ({ markerData } : Props)  => {
       ref={markerRef}
       position={[markerData.lat, markerData.long]}
       icon={svgIcon}
-      eventHandlers={{
-        mouseover: (event) => {}
-      }}
     >
       <MarkerTooltip
         markerData={markerData}

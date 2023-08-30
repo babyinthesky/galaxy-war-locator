@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getDataPrefixUrl } from '../../config';
 import Image from 'next/image';
 import { BsFillPersonVcardFill, BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
@@ -9,6 +8,7 @@ import MemberCardTextLine from './MemberCardTextLine';
 import { useAppDispatch } from '@/app/redux/hooks';
 import { setHighlightedMemberId } from '@/app/redux/slices/userEventDataSlice';
 import { roundDistance } from '@/app/util';
+import { getDataPrefixUrl } from '../../config';
 
 const AVATAR_SIZE = 70;
 
@@ -51,14 +51,12 @@ const MemberCard = ({ id, distance } : Props) => {
   }
 
   return (
-    <div 
+    <div
       className="flex flex-row rounded-lg px-3 py-4
-      bg-gradient-to-b from-gray-600 to-gray-900
-      shadow-gray-500 shadow-sm
-      hover:shadow-cyan-500/50 hover:shadow-lg"
+        bg-gradient-to-b from-gray-600 to-gray-900
+        shadow-gray-500/50 shadow-sm
+        hover:drop-shadow-glow"
       onMouseEnter={() => {
-        console.log('over', id);
-        // TODO: update highlighted member id
         dispatch(setHighlightedMemberId(id));
       }}
       onMouseLeave={() => {
