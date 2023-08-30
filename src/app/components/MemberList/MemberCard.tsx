@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getDataPrefixUrl } from '../../config';
 import Image from 'next/image';
 import { BsFillPersonVcardFill, BsGenderMale, BsGenderFemale } from 'react-icons/bs';
 import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MemberCardTextLine from './MemberCardTextLine';
+import { useAppDispatch } from '@/app/redux/hooks';
+import { setHighlightedMemberId } from '@/app/redux/slices/userEventDataSlice';
+import { roundDistance } from '@/app/util';
+import { getDataPrefixUrl } from '../../config';
 
 const AVATAR_SIZE = 70;
 
@@ -29,37 +32,35 @@ type DetailedInfo = {
   species: string;
 }
 
-const roundDistance = (distance: number) => Number((distance/1000).toFixed(1));
-
 const MemberCard = ({ id, distance } : Props) => {
   const [memberInfo, setMemberInfo] = useState<DetailedInfo | null>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (id) {
       try{     
         axios.get(getDataPrefixUrl(id)).then((response) => {
-          console.log(response.data);
           setMemberInfo(response.data);
         });
       } catch (error) {
         console.error(error);
       }
-    }
-  }, [id])
+  }, [])
 
   if (!memberInfo) {
     return null;
   }
 
   return (
-    <div 
+    <div
       className="flex flex-row rounded-lg px-3 py-4
-      bg-gradient-to-b from-gray-600 to-gray-900
-      shadow-gray-500 shadow-sm
-      hover:shadow-cyan-500/50 hover:shadow-lg"
+        bg-gradient-to-b from-gray-600 to-gray-900
+        shadow-gray-500/50 shadow-sm
+        hover:drop-shadow-glow"
       onMouseEnter={() => {
-        console.log('over', id);
-        // TODO: update highlighted member id
+        dispatch(setHighlightedMemberId(id));
+      }}
+      onMouseLeave={() => {
+        dispatch(setHighlightedMemberId(''));
       }}
     >
       <div className={`rounded-full h-[70px] overflow-hidden`}>

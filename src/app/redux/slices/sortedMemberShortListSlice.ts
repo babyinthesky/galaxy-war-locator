@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
-import { MemberShortInfo } from '../types';
+import type { RootState } from '../types';
+import { MemberShortInfoForSorting } from '../types';
 
 const initialState= {
-  list: [] as MemberShortInfo[],
+  list: [] as MemberShortInfoForSorting[],
 }
 
 export const sortedMemberShortListSlice = createSlice({
