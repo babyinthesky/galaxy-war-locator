@@ -50,21 +50,21 @@ const MemberCard = ({ id } : Props) => {
 
   return (
     <div 
-      className="flex flex-row bg-gray-800 rounded-lg px-2 py-4
+      className="flex flex-row rounded-lg px-3 py-4
+      bg-gradient-to-b from-gray-600 to-gray-900
       shadow-gray-500 shadow-sm
       hover:shadow-cyan-500/50 hover:shadow-lg"
     >
       <div className={`rounded-full h-[${AVATAR_SIZE}px] overflow-hidden`}>
         <Image
           src={memberInfo.image}
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
           alt={memberInfo.name}
           priority
           width={AVATAR_SIZE}
           height={AVATAR_SIZE}
         />
       </div>
-      <div className="ml-3 text-slate-300 flex flex-col">
+      <div className="ml-6 text-slate-300 flex flex-col">
         <MemberCardTextLine
           text={memberInfo.name}
           icon={<BsFillPersonVcardFill />}
