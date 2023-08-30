@@ -9,7 +9,8 @@ const MemberGridList = () => {
   const sortedList = useAppSelector(selectSortedShortList);
   // TODO: load id list and location
   // members
-  const renderList = sortedList.length > 0 ? sortedList : memberList
+  const renderList = sortedList.length > 0 
+    ? sortedList : memberList.map((member) => ({...member, distance: undefined}));
   return (
     <div className="h-80 lg:h-96 overflow-y-scroll my-4 px-2">
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-3">
@@ -17,6 +18,7 @@ const MemberGridList = () => {
           <MemberCard
             key={member.id}
             id={member.id}
+            distance={member.distance}
           />
         ))}
       </div>
