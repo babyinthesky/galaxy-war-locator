@@ -7,7 +7,7 @@ import { SECRET_URL } from '../config';
 type MemberShortInfo = {
   id: string;
   lat: string;  // number
-  lon: string; // number
+  long: string; // number
 }
 
 const initialState= {
