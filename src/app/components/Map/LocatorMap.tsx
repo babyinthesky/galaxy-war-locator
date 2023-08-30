@@ -8,12 +8,12 @@ const Map = () => {
   const { list: memberShortList, isLoading, hasError } = useAppSelector(selectMemberShortList);
 
   return (
-    <div className="flex min-h-[90%] w-full flex-1">
+    <div className="h-80 lg:h-96 w-full">
       <MapContainer
         center={[0, 0]} 
         zoom={1}
         scrollWheelZoom={false}
-        className="w-full"
+        className="w-full h-full"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
