@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
+import type { RootState } from '../types';
 import axios from 'axios';
 import { SECRET_URL } from '../../config';
 import { MemberShortInfo } from '../types';
@@ -52,7 +52,5 @@ export const memberShortListSlice = createSlice({
 });
 
 export const selectMemberShortList = (state: RootState) => state.memberShortList;
-// export const selectMemberShortListLoadingState = (state: RootState) => state.memberShortList.isLoading;
-// export const selectMemberShortListErrorState = (state: RootState) => state.memberShortList.hasError;
 
 export default memberShortListSlice.reducer;
