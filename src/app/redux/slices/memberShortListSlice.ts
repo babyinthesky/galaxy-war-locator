@@ -34,7 +34,12 @@ export const memberShortListSlice = createSlice({
       })
       .addCase(getMemberShortList.fulfilled, (state, action) => {
         if (action.payload) {
-          state.list = JSON.parse(action.payload);
+          state.list = JSON.parse(action.payload, (key, value) => {
+            if (key === 'lat' || key === 'long') {
+              return parseFloat(value);
+            }
+            return value;
+          });
         }
         state.isLoading = false;
         state.hasError = false;

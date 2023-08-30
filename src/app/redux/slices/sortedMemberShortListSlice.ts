@@ -15,7 +15,7 @@ export const sortedMemberShortListSlice = createSlice({
     }
   },
 });
-
+export const { setSortedMemberShortList } = sortedMemberShortListSlice.actions;
 export const selectSortedShortList = (state: RootState) => state.sortedShortList.list;
 
 export default sortedMemberShortListSlice.reducer;

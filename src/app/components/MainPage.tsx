@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { selectMemberShortList, getMemberShortList } from '../redux/slices/memberShortListSlice';
 
 // To eliminate the error: 'ReferenceError: window is not defined'
-const LocaterMap = dynamic(() => import('./LocatorMap'), { ssr: false })
+const LocaterMap = dynamic(() => import('./Map/LocatorMap'), { ssr: false })
 
 const MainPage = () => {
   const dispatch = useAppTrunkDispatch();

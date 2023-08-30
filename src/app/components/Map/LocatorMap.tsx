@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { useAppSelector } from '../redux/hooks';
-import { selectMemberShortList } from '../redux/slices/memberShortListSlice';
+import { useAppSelector } from '../../redux/hooks';
+import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
 import MemberMapMarker from './MemberLocationMarker';
 import MyLocationMarker from './MyLocationMarker';
 
@@ -9,7 +9,7 @@ const Map = () => {
 
   return (
     <div className="flex min-h-[90%] w-full flex-1">
-      <MapContainer 
+      <MapContainer
         center={[0, 0]} 
         zoom={1}
         scrollWheelZoom={false}
@@ -23,8 +23,8 @@ const Map = () => {
             key={memberInfo.id}
             markerData={{
               id: memberInfo.id,
-              lat: parseFloat(memberInfo.lat),
-              long: parseFloat(memberInfo.long),
+              lat: memberInfo.lat,
+              long: memberInfo.long,
             }}
           />
         ))}
