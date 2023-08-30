@@ -11,7 +11,7 @@ const MemberGridList = () => {
     ? sortedList : memberList.map((member) => ({...member, distance: undefined}));
   return (
     <div className="h-80 lg:h-96 overflow-y-scroll my-4 px-2">
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-3 py-4 px-2">
         {renderList.map((member) => (
           <MemberCard
             key={member.id}
