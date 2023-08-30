@@ -1,6 +1,6 @@
 import { divIcon } from "leaflet";
 import { Marker, Tooltip } from "react-leaflet";
-import personFilledMarker from '../../assets/svgs/location-person-filled';
+import personFilledMarker from '../../svgs/location-person-filled';
 
 type MarkerData = {
   id: string;
@@ -18,7 +18,6 @@ const svgIcon = divIcon({
   iconSize: [30, 35], // TODO: move to config
   iconAnchor: [15, 35] // TODO: calculation function
 });
-
 
 const MemberLocationMarker = ({ markerData } : Props)  => {
   return (

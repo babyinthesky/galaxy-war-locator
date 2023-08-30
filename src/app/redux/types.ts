@@ -1,5 +1,9 @@
 export type MemberShortInfo = {
   id: string;
-  lat: string;  // number
-  long: string; // number
+  lat: number;
+  long: number;
 }
+
+export type MemberShortInfoForSorting = {
+  distance: number;
+} & MemberShortInfo;
