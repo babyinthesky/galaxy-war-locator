@@ -1,30 +1,16 @@
 'use client'
-import { applyMiddleware } from "redux";
+import { combineReducers } from "redux";
 import { configureStore, ThunkDispatch, AnyAction } from "@reduxjs/toolkit"
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { createWrapper } from "next-redux-wrapper";
-import rootReducer from "./reducers/rootReducer";
-import memberShortListReducer from './slice';
+import memberShortListReducer from './memberShortListSlice';
 
-// initial states here
-// 
+const rootReducer = combineReducers({
+  memberShortList: memberShortListReducer,
+})
 
-// middleware
-const middleware = [thunk];
-
-// assigning store to next wrapper
-const store = configureStore({
-  reducer: memberShortListReducer,
+export const store = configureStore({
+  reducer: rootReducer,
   devTools: true,
-  middleware,
 });
-
-const makeStore = () => store
-
-export const wrapper = createWrapper(makeStore);
-// export type RootState = ReturnType<typeof reducer>;
-// export type AppDispatch = ReturnType<typeof makeStore>["dispatch"];
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

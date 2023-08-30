@@ -10,27 +10,26 @@ type MemberShortInfo = {
   lon: string; // number
 }
 
+const initialState= {
+  list: [] as MemberShortInfo[],
+  isLoading: false,
+  hasError: false,
+}
+
 export const getMemberShortList = createAsyncThunk(
   "getMemberShortList", 
   async () => {
     try {
       const response = await axios.get(SECRET_URL);
-      return response.data;
+      const message = atob(response.data.message);
+      return message;
     } catch (error) {
       console.error(error);
     }
 });
 
-// Define the initial state using that type
-const initialState= {
-  memberShortInfoList: [] as MemberShortInfo[],
-  isLoading: false,
-  hasError: false,
-}
-
 export const memberShortListSlice = createSlice({
   name: 'memberShortListSlice',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -40,7 +39,9 @@ export const memberShortListSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getMemberShortList.fulfilled, (state, action) => {
-        state.memberShortInfoList = action.payload;
+        if (action.payload) {
+          state.list = JSON.parse(action.payload);
+        }
         state.isLoading = false;
         state.hasError = false;
       })
@@ -51,10 +52,8 @@ export const memberShortListSlice = createSlice({
   },
 });
 
+export const selectMemberShortList = (state: RootState) => state.memberShortList;
+// export const selectMemberShortListLoadingState = (state: RootState) => state.memberShortList.isLoading;
+// export const selectMemberShortListErrorState = (state: RootState) => state.memberShortList.hasError;
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectMemberShortInfoList = (state: RootState) => state.memberShortInfoList;
-export const selectMemberShortInfoLoadingState = (state: RootState) => state.isLoading;
-export const selectMemberShortInfoErrorState = (state: RootState) => state.hasError;
-
-export default memberShortListSlice.reducer
+export default memberShortListSlice.reducer;

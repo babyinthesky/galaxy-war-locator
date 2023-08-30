@@ -1,29 +1,25 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch  } from 'react-redux';
-import { useAppDispatch } from '../redux/hooks';
+import React, { useState, useEffect, FC } from 'react';
+import { useAppTrunkDispatch, useAppSelector } from '../redux/hooks';
 import { SECRET_URL } from '../config';
 import LoadingSpinner from './LoadingSpinner';
 import dynamic from 'next/dynamic';
-import { getSecret } from '../redux/actions/action';
-import { RootState, AppThunkDispatch } from '../redux/store';
-import { selectMemberShortInfoList, getMemberShortList } from '../redux/slice';
-import { wrapper } from "../redux/store";
+import { selectMemberShortList, getMemberShortList } from '../redux/memberShortListSlice';
 
 // To eliminate the error: 'ReferenceError: window is not defined'
 const LocaterMap = dynamic(() => import('./LocatorMap'), { ssr: false })
 
 const MainPage = () => {
   const [errorText, setErrorText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const dispatch = useDispatch<AppThunkDispatch>()
-  const usersList = useSelector(selectMemberShortInfoList);
+  const dispatch = useAppTrunkDispatch();
+  const { list: memberShortList, isLoading, hasError } = useAppSelector(selectMemberShortList);
   // const {loading, error, member} = usersList
 
   useEffect(() => {
-      setIsLoading(true);
+      // setIsLoading(true);
       dispatch(getMemberShortList())
     //   fetch(SECRET_URL).then((res) => {
     //   setIsLoading(false);
@@ -47,8 +43,9 @@ const MainPage = () => {
       );
   }
 
+  console.log({memberShortList})
   return (
-    <div className="flex flex-col flex-1 flex-wrap min-h-[80%] w-full content-center">
+          <div className="flex flex-col flex-1 flex-wrap min-h-[80%] w-full content-center">
         <h1 className="text-center">Star Wars - Rebellion: Locator</h1>
         <p>{errorText}</p>
         <LocaterMap />
@@ -57,4 +54,5 @@ const MainPage = () => {
   );
 };
 
-export default wrapper.withRedux(MainPage);
+export default MainPage;
+// export default wrapper.withRedux(MainPage);
