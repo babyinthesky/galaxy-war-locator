@@ -1,14 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { RootState } from './store';
+import type { RootState } from '../store';
 import axios from 'axios';
-import { SECRET_URL } from '../config';
-
-// Define a type for the slice state
-type MemberShortInfo = {
-  id: string;
-  lat: string;  // number
-  lon: string; // number
-}
+import { SECRET_URL } from '../../config';
+import { MemberShortInfo } from '../types';
 
 const initialState= {
   list: [] as MemberShortInfo[],

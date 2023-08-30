@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useAppTrunkDispatch, useAppSelector } from '../redux/hooks';
 import LoadingSpinner from './LoadingSpinner';
 import dynamic from 'next/dynamic';
-import { selectMemberShortList, getMemberShortList } from '../redux/memberShortListSlice';
+import { selectMemberShortList, getMemberShortList } from '../redux/slices/memberShortListSlice';
 
 // To eliminate the error: 'ReferenceError: window is not defined'
 const LocaterMap = dynamic(() => import('./LocatorMap'), { ssr: false })
