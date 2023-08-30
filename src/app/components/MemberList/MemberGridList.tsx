@@ -7,8 +7,6 @@ import MemberCard from './MemberCard';
 const MemberGridList = () => {
   const { list: memberList } = useAppSelector(selectMemberShortList);
   const sortedList = useAppSelector(selectSortedShortList);
-  // TODO: load id list and location
-  // members
   const renderList = sortedList.length > 0 
     ? sortedList : memberList.map((member) => ({...member, distance: undefined}));
   return (
