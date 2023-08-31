@@ -34,7 +34,7 @@ const AppModal = ({ children } : Props) => {
     contentLabel="Example Modal"
     // style={customStyles}
     className="absolute top-1/2 left-1/2 right-1/4 bottom-1/4 mr-[-50%] translate-x-[-50%] translate-y-[-50%] bg-black"
-    overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-black/60"
+    overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-black/60  z-[2]"
   >
     <button
       onClick={() => dispatch(setIsModalOpen(false))}
