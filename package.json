@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --config ./jest.config.json"
+    "test": "jest --config ./jest.config.mjs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -32,9 +32,6 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.22.14",
-    "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.11",
     "@testing-library/jest-dom": "^6.1.2",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.4",
