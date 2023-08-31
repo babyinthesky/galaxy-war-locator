@@ -34,10 +34,6 @@ const MemberCard = ({ memberInfo } : Props) => {
     }
   }, [])
 
-  if (!memberInfo.image) {
-    return null;
-  }
-
   return (
     <div
       className="flex flex-row rounded-lg px-3 py-4
@@ -56,24 +52,27 @@ const MemberCard = ({ memberInfo } : Props) => {
       }}
     >
       <div className={`rounded-full w-[70px] h-[70px] overflow-hidden`}>
-        <Image
-          src={memberInfo.image as string}
-          alt={memberInfo.name as string}
-          priority
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: 'auto', height: 'auto' }}
-        />
+        {memberInfo.image && (
+          <Image
+            src={memberInfo.image as string}
+            alt={memberInfo.name as string}
+            priority
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+        )}
       </div>
       <div className="ml-6 text-neutral-300 flex flex-col">
         <MemberCardTextLine
           text={memberInfo.name as string}
           icon={<BsFillPersonVcardFill />}
         />
-        {memberInfo.gender === 'male' ? (
+        {memberInfo.gender === 'male' && (
           <BsGenderMale />
-        ) : (
+        )}
+        {memberInfo.gender === 'female' && (
           <BsGenderFemale />
         )}
         <MemberCardTextLine

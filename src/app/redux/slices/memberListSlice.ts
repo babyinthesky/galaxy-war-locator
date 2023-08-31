@@ -34,7 +34,6 @@ export const memberListSlice = createSlice({
   initialState,
   reducers: {
     setMemberList: (state, action) => {
-      console.log(action.payload);
       state.list = action.payload;
     },
     sortMemberList: (state, action) => {
