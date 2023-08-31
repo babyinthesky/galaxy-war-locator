@@ -33,6 +33,10 @@ export const memberListSlice = createSlice({
   name: 'memberListSlice',
   initialState,
   reducers: {
+    setMemberList: (state, action) => {
+      console.log(action.payload);
+      state.list = action.payload;
+    },
     sortMemberList: (state, action) => {
       const memberListWithDistance = action.payload;
       const sortedList = [] as MemberListWithDistance;
@@ -52,10 +56,10 @@ export const memberListSlice = createSlice({
         cloneList.push(action.payload);
       }
       state.list = cloneList;
-    }
+    },
   },
 });
-export const { sortMemberList, updateDataIntoMemberList } = memberListSlice.actions;
+export const { setMemberList, sortMemberList, updateDataIntoMemberList } = memberListSlice.actions;
 export const selectMemberList = (state: RootState) => state.memberList.list;
 
 export default memberListSlice.reducer;

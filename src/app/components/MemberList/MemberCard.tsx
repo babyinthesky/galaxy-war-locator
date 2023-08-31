@@ -66,7 +66,7 @@ const MemberCard = ({ memberInfo } : Props) => {
           style={{ width: 'auto', height: 'auto' }}
         />
       </div>
-      <div className="ml-6 text-slate-300 flex flex-col">
+      <div className="ml-6 text-neutral-300 flex flex-col">
         <MemberCardTextLine
           text={memberInfo.name as string}
           icon={<BsFillPersonVcardFill />}
