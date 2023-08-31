@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { divIcon } from "leaflet";
 import { Marker, Tooltip, useMapEvents } from "react-leaflet";
-import starMarker from '../../svgs/map-marker-star';
+import starMarker from '../../assets/svgs/map-marker-star';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
 import { setSortedMemberShortList } from '../../redux/slices/sortedMemberShortListSlice';

@@ -16,8 +16,11 @@ const config: Config = {
       dropShadow: {
         glow: [
           "0 0px 8px rgba(0, 188, 212, 0.45)",
-          "0 0px 10px rgba(0, 188, 212, 0.3)"
+          "0 0px 10px rgba(0, 188, 212, 0.3)",
         ]
+      },
+      fontFamily: {
+          'starwar' : ['Star Wars', 'sans-serif'],
       },
     },
   },
