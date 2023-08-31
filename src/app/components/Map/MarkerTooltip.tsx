@@ -37,18 +37,20 @@ const MarkerTooltip = ({markerData} : Props) => (
   <Tooltip>
         <div className="flex flex-col">
           <table>
-            <TableRow
-              title="ID:"
-              info={markerData.id}
-            />
-            <TableRow
-              title="Lat:"
-              info={roundFloat(markerData.lat)}
-            />
-            <TableRow
-              title="Lon:"
-              info={roundFloat(markerData.long)}
-            />
+            <tbody>
+              <TableRow
+                title="ID:"
+                info={markerData.id}
+              />
+              <TableRow
+                title="Lat:"
+                info={roundFloat(markerData.lat)}
+              />
+              <TableRow
+                title="Lon:"
+                info={roundFloat(markerData.long)}
+              />
+            </tbody>
           </table>
         </div>
       </Tooltip>

@@ -5,13 +5,8 @@ import starMarker from '../../svgs/map-marker-star';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
 import { setSortedMemberShortList } from '../../redux/slices/sortedMemberShortListSlice';
-import { MemberShortInfoForSorting } from '../../redux/types';
+import { MemberShortInfoForSorting, Location } from '../../redux/types';
 import MarkerTooltip from './MarkerTooltip';
-
-type Location = {
-  lat: number;
-  long: number;
-}
 
 type MemberShortListWithDistance = MemberShortInfoForSorting[];
 

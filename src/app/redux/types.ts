@@ -14,3 +14,12 @@ export type MemberShortInfo = {
 export type MemberShortInfoForSorting = {
   distance: number;
 } & MemberShortInfo;
+
+export type DetailedInfo = {
+  [key: string]: string | string[];
+}
+
+export type Location = {
+  lat: number;
+  long: number;
+}
