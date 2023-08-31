@@ -5,7 +5,6 @@ import starMarker from '../../assets/svgs/map-marker-star';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { sortMemberList } from '../../redux/slices/memberListSlice';
 import { Location, MemberListWithDistance } from '../../redux/types';
-import MarkerTooltip from './MarkerTooltip';
 import { selectMemberList } from '../../redux/slices/memberListSlice';
 
 const svgIcon = divIcon({
@@ -41,11 +40,7 @@ const MyLocationMarker = ()  => {
   }
 
   return (
-    <Marker position={[myLocation.lat, myLocation.long]} icon={svgIcon}>
-      <MarkerTooltip
-        markerData={myLocation}
-      />
-    </Marker>
+    <Marker position={[myLocation.lat, myLocation.long]} icon={svgIcon} />
   )
 }
 

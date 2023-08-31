@@ -21,11 +21,7 @@ const LocationMap = () => {
         {memberList.map((memberInfo) => (
           <MemberMapMarker
             key={memberInfo.id}
-            markerData={{
-              id: memberInfo.id,
-              lat: memberInfo.lat,
-              long: memberInfo.long,
-            }}
+            memberInfo={memberInfo}
           />
         ))}
         <MyLocationMarker />
