@@ -3,9 +3,11 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
 import MemberMapMarker from './MemberLocationMarker';
 import MyLocationMarker from './MyLocationMarker';
+import { selectSortedMemberList } from '@/app/redux/slices/memberListSlice';
 
 const Map = () => {
   const { list: memberShortList, isLoading, hasError } = useAppSelector(selectMemberShortList);
+  const list = useAppSelector(selectSortedMemberList);
 
   return (
     <div className="h-80 lg:h-96 w-full">

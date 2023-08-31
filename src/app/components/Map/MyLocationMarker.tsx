@@ -4,11 +4,13 @@ import { Marker, Tooltip, useMapEvents } from "react-leaflet";
 import starMarker from '../../assets/svgs/map-marker-star';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
-import { setSortedMemberShortList } from '../../redux/slices/sortedMemberShortListSlice';
+import { setSortedMemberList } from '../../redux/slices/memberListSlice';
 import { MemberShortInfoForSorting, Location } from '../../redux/types';
 import MarkerTooltip from './MarkerTooltip';
 
-type MemberShortListWithDistance = MemberShortInfoForSorting[];
+type MemberWithDistance = MemberShortInfoForSorting & {distance: number};
+
+type MemberListWithDistance = MemberWithDistance[];
 
 const svgIcon = divIcon({
   html: starMarker,
@@ -17,7 +19,7 @@ const svgIcon = divIcon({
   iconAnchor: [16, 35] // TODO: calculation function
 });
 
-const sortListByDistance = (listToSort: MemberShortListWithDistance, sortedList: MemberShortListWithDistance) => {
+const sortListByDistance = (listToSort: MemberListWithDistance, sortedList: MemberListWithDistance) => {
   const listLength = listToSort.length;
   listToSort.forEach((member) => {
     if (sortedList.length === 0) {
@@ -54,10 +56,10 @@ const MyLocationMarker = ()  => {
       const memberListWithDistance = memberList.map((member) => ({
         ...member,
         distance: map.distance([e.latlng.lat, e.latlng.lng], [member.lat, member.long])
-      })) as MemberShortListWithDistance;
-      const sortedList = [] as MemberShortListWithDistance;
+      })) as MemberListWithDistance;
+      const sortedList = [] as MemberListWithDistance;
       sortListByDistance(memberListWithDistance, sortedList);
-      dispatch(setSortedMemberShortList(sortedList));
+      dispatch(setSortedMemberList(sortedList));
     },         
   });
 

@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit"
 import memberShortListReducer from './slices/memberShortListSlice';
-import sortedMemberShortListReducer from "./slices/sortedMemberShortListSlice";
+import memberListReducer from "./slices/memberListSlice";
 import userEventDataReducer from "./slices/userEventDataSlice";
 
 const rootReducer = combineReducers({
   memberShortList: memberShortListReducer,
-  sortedShortList: sortedMemberShortListReducer,
+  memberList: memberListReducer,
   userEventData: userEventDataReducer,
 })
 

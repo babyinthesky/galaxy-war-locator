@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from '@/app/redux/hooks';
-import { selectSortedShortList } from '@/app/redux/slices/sortedMemberShortListSlice';
+import { selectSortedMemberList } from '@/app/redux/slices/memberListSlice';
 import { selectMemberShortList } from '@/app/redux/slices/memberShortListSlice';
+import { MemberInfo } from '@/app/redux/types';
 import MemberCard from './MemberCard';
 
 const MemberGridList = () => {
-  const { list: memberList } = useAppSelector(selectMemberShortList);
-  const sortedList = useAppSelector(selectSortedShortList);
+  const { list: memberShortList } = useAppSelector(selectMemberShortList);
+  const sortedList = useAppSelector(selectSortedMemberList);
+
   const renderList = sortedList.length > 0 
-    ? sortedList : memberList.map((member) => ({...member, distance: undefined}));
+    ? sortedList : memberShortList.map((member) => ({...member, distance: undefined}));
+  
+  console.log({renderList});
   return (
     <div className="h-80 lg:h-96 overflow-y-scroll my-4 px-2">
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-3 py-4 px-2">
         {renderList.map((member) => (
           <MemberCard
             key={member.id}
-            id={member.id}
-            distance={member.distance}
+            memberInfo={member}
           />
         ))}
       </div>
