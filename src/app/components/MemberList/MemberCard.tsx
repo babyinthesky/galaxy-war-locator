@@ -46,10 +46,11 @@ const MemberCard = ({ memberInfo } : Props) => {
       onMouseLeave={() => {
         dispatch(setHighlightedMemberId(''));
       }}
-      onMouseDown={() => {
-        dispatch(setIsModalOpen(true));
-        dispatch(setSelectedMemberDetails(memberInfo));
+      onClick={() => {
+          dispatch(setIsModalOpen(true));
+          dispatch(setSelectedMemberDetails(memberInfo));
       }}
+      role="gridcell"
     >
       <div className={`rounded-full w-[70px] h-[70px] overflow-hidden`}>
         {memberInfo.image && (
