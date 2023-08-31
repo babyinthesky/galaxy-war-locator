@@ -11,8 +11,6 @@ import { roundDistance } from '@/app/util';
 import { getDataPrefixUrl } from '../../config';
 import { DetailedInfo } from '@/app/redux/types';
 
-const AVATAR_SIZE = 70;
-
 interface Props {
   id: string;
   distance?: number;
@@ -53,13 +51,15 @@ const MemberCard = ({ id, distance } : Props) => {
         dispatch(setSelectedMemberDetails(memberInfo));
       }}
     >
-      <div className={`rounded-full h-[70px] overflow-hidden`}>
+      <div className={`rounded-full w-[70px] h-[70px] overflow-hidden`}>
         <Image
           src={memberInfo.image as string}
           alt={memberInfo.name as string}
           priority
-          width={AVATAR_SIZE}
-          height={AVATAR_SIZE}
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: 'auto', height: 'auto' }}
         />
       </div>
       <div className="ml-6 text-slate-300 flex flex-col">

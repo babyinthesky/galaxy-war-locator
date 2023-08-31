@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react';
-import { useAppTrunkDispatch, useAppSelector, useAppDispatch } from '../redux/hooks';
+import { useAppTrunkDispatch, useAppSelector } from '../redux/hooks';
 import LoadingSpinner from './LoadingSpinner';
 import dynamic from 'next/dynamic';
 import { selectMemberShortList, getMemberShortList } from '../redux/slices/memberShortListSlice';
@@ -13,7 +13,7 @@ const LocaterMap = dynamic(() => import('./Map/LocatorMap'), { ssr: false })
 
 const MainPage = () => {
   const trunkDispatch = useAppTrunkDispatch();
-  const { list: memberShortList, isLoading, hasError } = useAppSelector(selectMemberShortList);
+  const { isLoading, hasError } = useAppSelector(selectMemberShortList);
 
   useEffect(() => {
     trunkDispatch(getMemberShortList());
@@ -21,7 +21,9 @@ const MainPage = () => {
 
   if (isLoading) {
       return (
-        <LoadingSpinner />
+        <div className="m-auto">
+          <LoadingSpinner />
+        </div>
       );
   }
 
