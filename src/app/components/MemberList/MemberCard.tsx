@@ -6,30 +6,16 @@ import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MemberCardTextLine from './MemberCardTextLine';
 import { useAppDispatch } from '@/app/redux/hooks';
-import { setHighlightedMemberId, setIsModalOpen } from '@/app/redux/slices/userEventDataSlice';
+import { setHighlightedMemberId, setIsModalOpen, setSelectedMemberDetails } from '@/app/redux/slices/userEventDataSlice';
 import { roundDistance } from '@/app/util';
 import { getDataPrefixUrl } from '../../config';
+import { DetailedInfo } from '@/app/redux/types';
 
 const AVATAR_SIZE = 70;
 
 interface Props {
   id: string;
   distance?: number;
-}
-
-type DetailedInfo = {
-  id: string;
-  name: string;
-  height: string;
-  mass: string;
-  gender: string;
-  homeworld: string;
-  wiki: string;
-  image: string;
-  born: string;
-  died: string;
-  diedLocation: string;
-  species: string;
 }
 
 const MemberCard = ({ id, distance } : Props) => {
@@ -63,13 +49,14 @@ const MemberCard = ({ id, distance } : Props) => {
         dispatch(setHighlightedMemberId(''));
       }}
       onMouseDown={() => {
-        dispatch(setIsModalOpen(true))
+        dispatch(setIsModalOpen(true));
+        dispatch(setSelectedMemberDetails(memberInfo));
       }}
     >
       <div className={`rounded-full h-[70px] overflow-hidden`}>
         <Image
-          src={memberInfo.image}
-          alt={memberInfo.name}
+          src={memberInfo.image as string}
+          alt={memberInfo.name as string}
           priority
           width={AVATAR_SIZE}
           height={AVATAR_SIZE}
@@ -77,7 +64,7 @@ const MemberCard = ({ id, distance } : Props) => {
       </div>
       <div className="ml-6 text-slate-300 flex flex-col">
         <MemberCardTextLine
-          text={memberInfo.name}
+          text={memberInfo.name as string}
           icon={<BsFillPersonVcardFill />}
         />
         {memberInfo.gender === 'male' ? (
@@ -86,11 +73,11 @@ const MemberCard = ({ id, distance } : Props) => {
           <BsGenderFemale />
         )}
         <MemberCardTextLine
-          text={memberInfo.species}
+          text={memberInfo.species as string}
           icon={<MdPersonSearch />}
         />
         <MemberCardTextLine
-          text={memberInfo.homeworld}
+          text={memberInfo.homeworld as string}
           icon={<MdOutlineHome />}
         />
         {distance && (
