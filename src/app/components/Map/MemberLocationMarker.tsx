@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { divIcon, Marker as MarkerType } from "leaflet";
 import { Marker } from "react-leaflet";
-import personFilledMarker from '../../svgs/location-person-filled';
+import personFilledMarker from '../../assets/svgs/location-person-filled';
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectHighlightedMemberId } from "@/app/redux/slices/userEventDataSlice";
 import MarkerTooltip, { MarkerData } from './MarkerTooltip';
@@ -36,6 +36,11 @@ const MemberLocationMarker = ({ markerData } : Props)  => {
       ref={markerRef}
       position={[markerData.lat, markerData.long]}
       icon={svgIcon}
+      eventHandlers={{
+        mousedown: () => {
+          // TODO: get http and open modal?
+        }
+      }}
     >
       <MarkerTooltip
         markerData={markerData}
