@@ -39,7 +39,7 @@ const MemberLocationMarker = ({ memberInfo } : Props)  => {
       position={[memberInfo.lat, memberInfo.long]}
       icon={svgIcon}
       eventHandlers={{
-        mousedown: () => {
+        click: () => {
           dispatch(setIsModalOpen(true));
           dispatch(setSelectedMemberDetails(memberInfo));
         }
