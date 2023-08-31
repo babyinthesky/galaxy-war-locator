@@ -8,7 +8,7 @@ import Link from "next/link";
 
 interface Props {
   title: string;
-  info: string | string[];
+  info: string | string[] | number | undefined;
 }
 
 const TextLine = ({title, info} : Props) => {
@@ -17,7 +17,7 @@ const TextLine = ({title, info} : Props) => {
   if (title === 'image') {
     return null
   }
-  if (title === 'wiki') {
+  if (title === 'wiki' && typeof renderText === 'string') {
     renderInfoElement = (
       <Link href={renderText}>
         <BsLink className="text-xl"/>

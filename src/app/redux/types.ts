@@ -1,4 +1,4 @@
-import { configureStore, ThunkDispatch, AnyAction } from "@reduxjs/toolkit"
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit"
 import { store } from "./store";
 
 export type RootState = ReturnType<typeof store.getState>
@@ -11,13 +11,17 @@ export type MemberShortInfo = {
   long: number;
 }
 
-export type MemberShortInfoForSorting = {
-  distance: number;
-} & MemberShortInfo;
-
 export type DetailedInfo = {
-  [key: string]: string | string[];
+  [key: string]: string | string[] | undefined | number;
 }
+
+export type MemberInfo = MemberShortInfo & DetailedInfo & {
+  distance?: number;
+};
+
+export type MemberWithDistance = MemberInfo & {distance: number};
+
+export type MemberListWithDistance = MemberWithDistance[];
 
 export type Location = {
   lat: number;

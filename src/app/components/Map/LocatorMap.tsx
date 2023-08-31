@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { useAppSelector } from '../../redux/hooks';
-import { selectMemberShortList } from '../../redux/slices/memberShortListSlice';
 import MemberMapMarker from './MemberLocationMarker';
 import MyLocationMarker from './MyLocationMarker';
+import { selectMemberList } from '@/app/redux/slices/memberListSlice';
 
-const Map = () => {
-  const { list: memberShortList, isLoading, hasError } = useAppSelector(selectMemberShortList);
+const LocationMap = () => {
+  const memberList = useAppSelector(selectMemberList);
 
   return (
     <div className="h-80 lg:h-96 w-full">
@@ -18,14 +18,10 @@ const Map = () => {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {!isLoading && memberShortList.map((memberInfo) => (
+        {memberList.map((memberInfo) => (
           <MemberMapMarker
             key={memberInfo.id}
-            markerData={{
-              id: memberInfo.id,
-              lat: memberInfo.lat,
-              long: memberInfo.long,
-            }}
+            memberInfo={memberInfo}
           />
         ))}
         <MyLocationMarker />
@@ -34,6 +30,6 @@ const Map = () => {
   )
 }
 
-export default Map;
+export default LocationMap;
 
 

@@ -2,12 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { divIcon, Marker as MarkerType } from "leaflet";
 import { Marker } from "react-leaflet";
 import personFilledMarker from '../../assets/svgs/location-person-filled';
-import { useAppSelector } from "@/app/redux/hooks";
-import { selectHighlightedMemberId } from "@/app/redux/slices/userEventDataSlice";
-import MarkerTooltip, { MarkerData } from './MarkerTooltip';
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { selectHighlightedMemberId, setIsModalOpen, setSelectedMemberDetails } from "@/app/redux/slices/userEventDataSlice";
+import MarkerTooltip from './MarkerTooltip';
+import { MemberInfo } from '@/app/redux/types';
 
 interface Props {
-  markerData: MarkerData;
+  memberInfo: MemberInfo;
 }
 
 const svgIcon = divIcon({
@@ -17,13 +18,14 @@ const svgIcon = divIcon({
   iconAnchor: [15, 35] // TODO: calculation function
 });
 
-const MemberLocationMarker = ({ markerData } : Props)  => {
+const MemberLocationMarker = ({ memberInfo } : Props)  => {
+  const dispatch = useAppDispatch();
   const highlightedMemberId = useAppSelector(selectHighlightedMemberId);
   const markerRef = useRef<MarkerType<any> | null>(null);
   
   useEffect(() => {
     if (markerRef.current) {
-      if (markerData.id === highlightedMemberId) {
+      if (memberInfo.id === highlightedMemberId) {
         markerRef.current.openTooltip();
       } else {
         markerRef.current.closeTooltip();
@@ -34,16 +36,17 @@ const MemberLocationMarker = ({ markerData } : Props)  => {
   return (
     <Marker
       ref={markerRef}
-      position={[markerData.lat, markerData.long]}
+      position={[memberInfo.lat, memberInfo.long]}
       icon={svgIcon}
       eventHandlers={{
         mousedown: () => {
-          // TODO: get http and open modal?
+          dispatch(setIsModalOpen(true));
+          dispatch(setSelectedMemberDetails(memberInfo));
         }
       }}
     >
       <MarkerTooltip
-        markerData={markerData}
+        memberInfo={memberInfo}
       />
     </Marker>
   )

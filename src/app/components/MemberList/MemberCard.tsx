@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { BsFillPersonVcardFill, BsGenderMale, BsGenderFemale } from 'react-icons/bs';
@@ -9,32 +9,30 @@ import { useAppDispatch } from '@/app/redux/hooks';
 import { setHighlightedMemberId, setIsModalOpen, setSelectedMemberDetails } from '@/app/redux/slices/userEventDataSlice';
 import { roundDistance } from '@/app/util';
 import { getDataPrefixUrl } from '../../config';
-import { DetailedInfo } from '@/app/redux/types';
-
-const AVATAR_SIZE = 70;
+import { MemberInfo } from '@/app/redux/types';
+import { updateDataIntoMemberList } from '@/app/redux/slices/memberListSlice';
 
 interface Props {
-  id: string;
-  distance?: number;
+  memberInfo: MemberInfo;
 }
 
-const MemberCard = ({ id, distance } : Props) => {
-  const [memberInfo, setMemberInfo] = useState<DetailedInfo | null>();
+const MemberCard = ({ memberInfo } : Props) => {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
+    if(memberInfo?.id){
       try{     
-        axios.get(getDataPrefixUrl(id)).then((response) => {
-          setMemberInfo(response.data);
+        axios.get(getDataPrefixUrl(memberInfo.id)).then((response) => {
+          const data = response.data as MemberInfo;
+          dispatch(updateDataIntoMemberList({
+            ...memberInfo,
+            ...data,
+          }));
         });
       } catch (error) {
         console.error(error);
       }
+    }
   }, [])
-
-  if (!memberInfo) {
-    return null;
-  }
 
   return (
     <div
@@ -43,7 +41,7 @@ const MemberCard = ({ id, distance } : Props) => {
         shadow-gray-500/50 shadow-sm cursor-pointer
         hover:drop-shadow-glow"
       onMouseEnter={() => {
-        dispatch(setHighlightedMemberId(id));
+        dispatch(setHighlightedMemberId(memberInfo.id));
       }}
       onMouseLeave={() => {
         dispatch(setHighlightedMemberId(''));
@@ -53,23 +51,28 @@ const MemberCard = ({ id, distance } : Props) => {
         dispatch(setSelectedMemberDetails(memberInfo));
       }}
     >
-      <div className={`rounded-full h-[70px] overflow-hidden`}>
-        <Image
-          src={memberInfo.image as string}
-          alt={memberInfo.name as string}
-          priority
-          width={AVATAR_SIZE}
-          height={AVATAR_SIZE}
-        />
+      <div className={`rounded-full w-[70px] h-[70px] overflow-hidden`}>
+        {memberInfo.image && (
+          <Image
+            src={memberInfo.image as string}
+            alt={memberInfo.name as string}
+            priority
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+        )}
       </div>
-      <div className="ml-6 text-slate-300 flex flex-col">
+      <div className="ml-6 text-neutral-300 flex flex-col">
         <MemberCardTextLine
           text={memberInfo.name as string}
           icon={<BsFillPersonVcardFill />}
         />
-        {memberInfo.gender === 'male' ? (
+        {memberInfo.gender === 'male' && (
           <BsGenderMale />
-        ) : (
+        )}
+        {memberInfo.gender === 'female' && (
           <BsGenderFemale />
         )}
         <MemberCardTextLine
@@ -80,9 +83,9 @@ const MemberCard = ({ id, distance } : Props) => {
           text={memberInfo.homeworld as string}
           icon={<MdOutlineHome />}
         />
-        {distance && (
+        {memberInfo.distance && (
           <MemberCardTextLine
-            text={`${roundDistance(distance).toString()} km`}
+            text={`${roundDistance(memberInfo.distance).toString()} km`}
             icon={<FaMapMarkerAlt />}
           />
         )}
