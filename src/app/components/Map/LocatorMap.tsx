@@ -13,7 +13,7 @@ const Map = () => {
         center={[0, 0]} 
         zoom={1}
         scrollWheelZoom={false}
-        className="w-full h-full"
+        className="w-full h-full z-[-1]"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

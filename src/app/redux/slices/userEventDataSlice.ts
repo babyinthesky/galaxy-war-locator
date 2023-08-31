@@ -12,6 +12,7 @@ const initialState= {
     long: 0,
   } as Location,
   highlightedMemberId: '',
+  isModalOpen: false,
 }
 
 export const userEventDataSlice = createSlice({
@@ -23,12 +24,16 @@ export const userEventDataSlice = createSlice({
     },
     setHighlightedMemberId: (state, action) => {
       state.highlightedMemberId = action.payload;
+    },
+    setIsModalOpen: (state, action) => {
+      state.isModalOpen = action.payload;
     }
   },
 });
 
-export const { setHighlightedMemberId, setLocation } = userEventDataSlice.actions;
+export const { setHighlightedMemberId, setLocation, setIsModalOpen } = userEventDataSlice.actions;
 export const selectMyLocation = (state: RootState) => state.userEventData.myLocation;
 export const selectHighlightedMemberId = (state: RootState) => state.userEventData.highlightedMemberId;
+export const selectIsModalOpen = (state: RootState) => state.userEventData.isModalOpen;
 
 export default userEventDataSlice.reducer;

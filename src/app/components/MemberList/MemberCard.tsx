@@ -6,7 +6,7 @@ import { MdPersonSearch, MdOutlineHome } from 'react-icons/md';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import MemberCardTextLine from './MemberCardTextLine';
 import { useAppDispatch } from '@/app/redux/hooks';
-import { setHighlightedMemberId } from '@/app/redux/slices/userEventDataSlice';
+import { setHighlightedMemberId, setIsModalOpen } from '@/app/redux/slices/userEventDataSlice';
 import { roundDistance } from '@/app/util';
 import { getDataPrefixUrl } from '../../config';
 
@@ -53,7 +53,7 @@ const MemberCard = ({ id, distance } : Props) => {
   return (
     <div
       className="flex flex-row rounded-lg px-3 py-4
-        bg-gradient-to-b from-gray-600 to-gray-900
+        bg-gradient-to-b from-neutral-600 to-neutral-800
         shadow-gray-500/50 shadow-sm
         hover:drop-shadow-glow"
       onMouseEnter={() => {
@@ -61,6 +61,9 @@ const MemberCard = ({ id, distance } : Props) => {
       }}
       onMouseLeave={() => {
         dispatch(setHighlightedMemberId(''));
+      }}
+      onMouseDown={() => {
+        dispatch(setIsModalOpen(true))
       }}
     >
       <div className={`rounded-full h-[70px] overflow-hidden`}>
