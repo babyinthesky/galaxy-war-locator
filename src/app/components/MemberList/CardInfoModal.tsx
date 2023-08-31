@@ -59,6 +59,7 @@ const CardInfoModal = () => {
         <div className="w-3/4 flex flex-col">
           {Object.keys(renderInfo).map((key) => (
             <TextLine
+              key={key}
               title={key}
               info={renderInfo[key]}
             />
