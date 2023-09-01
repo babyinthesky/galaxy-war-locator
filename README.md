@@ -42,3 +42,7 @@ npm run start
 npm run test
 
 ```
+
+## What's next
+- Add more tests.
+- Review Redux structures
