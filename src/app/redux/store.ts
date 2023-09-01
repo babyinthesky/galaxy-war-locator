@@ -4,7 +4,7 @@ import memberShortListReducer from './slices/memberShortListSlice';
 import memberListReducer from "./slices/memberListSlice";
 import userEventDataReducer from "./slices/userEventDataSlice";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   memberShortList: memberShortListReducer,
   memberList: memberListReducer,
   userEventData: userEventDataReducer,
