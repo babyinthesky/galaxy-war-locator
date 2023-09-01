@@ -3,6 +3,8 @@ App demo displays markers on a map and a list of data, following the [assignment
 
 Demo supports responsive styles.
 
+[Live Demo](https://spectacular-florentine-de920a.netlify.app/)
+
 ## Applied Frameworks or libs
 - Next.js
 - Redux
@@ -42,3 +44,7 @@ npm run start
 npm run test
 
 ```
+
+## What's next
+- Add more tests.
+- Review Redux structures
