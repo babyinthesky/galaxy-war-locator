@@ -19,6 +19,7 @@ interface Props {
 const MemberCard = ({ memberInfo } : Props) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
+    // TODO: move GET to Redux slice
     if(memberInfo?.id){
       try{     
         axios.get(getDataPrefixUrl(memberInfo.id)).then((response) => {
