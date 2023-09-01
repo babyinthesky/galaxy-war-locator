@@ -25,6 +25,10 @@ const config: Config = {
       fontFamily: {
           'starwar' : ['Star Wars', 'sans-serif'],
       },
+      flex: {
+        '2': '2 2 0%',
+        '3': '3 3 0%',
+      }
     },
   },
   plugins: [],

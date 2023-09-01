@@ -24,12 +24,12 @@ const AppModal = ({ children } : Props) => {
       isOpen={isModalOpen}
       onRequestClose={closeModal}
       contentLabel="Example Modal"
-      className="absolute top-1/2 left-1/2 right-1/4 bottom-1/4 mr-[-50%] translate-x-[-50%] translate-y-[-50%] bg-black p-4 h-1/2"
+      className="absolute top-1/2 left-1/2 right-1/4 bottom-1/4 mr-[-50%] translate-x-[-50%] translate-y-[-50%] bg-black p-4 xs:h-[60%] sm:h-1/2"
       overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-black/60  z-[2]"
     >
       <button
         onClick={closeModal}
-        className="float-right mr-2 mt-2"
+        className="float-right mr-2 mt-2 xs:hidden sm:block"
       >
         <CgCloseR className="text-2xl"/>
       </button>
