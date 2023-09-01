@@ -36,7 +36,7 @@ const MemberCard = ({ memberInfo } : Props) => {
 
   return (
     <div
-      className="flex flex-row rounded-lg px-3 py-4
+      className="flex sm:flex-row xs:flex-col rounded-lg px-3 py-4
         bg-gradient-to-b from-neutral-600 to-neutral-800
         shadow-gray-500/50 shadow-sm cursor-pointer
         hover:drop-shadow-glow"
