@@ -29,7 +29,7 @@ const AppModal = ({ children } : Props) => {
     >
       <button
         onClick={closeModal}
-        className="float-right mr-2 mt-2"
+        className="float-right mr-2 mt-2 xs:hidden sm:block"
       >
         <CgCloseR className="text-2xl"/>
       </button>

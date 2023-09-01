@@ -25,15 +25,15 @@ const TextLine = ({title, info} : Props) => {
     );
   } else {
     renderInfoElement = (
-      <span> {renderText} </span>
+      <span className="flex-2 text-ellipsis"> {renderText} </span>
     );
   }
   return (
-    <div className="flex flex-row justify-start mb-2">
-      <div className="mr-2 w-1/3">
+    <div className="flex w-full flex-row justify-start mb-2">
+      <div className="mr-2 flex-1 text-ellipsis">
         {title}
       </div>
-      <div className="w-2/3">
+      <div className="flex-2 text-ellipsis">
         {renderInfoElement}
       </div>
     </div>
@@ -44,19 +44,21 @@ const CardInfoModal = () => {
   const renderInfo = useAppSelector(selectSelectedMemberDetails);
   return (
     <AppModal>
-      <div className="flex flex-row">
-      <div className={'w-1/4 overflow-hidden mr-6'}>
-        <Image
-          src={renderInfo.image as string}
-          alt={renderInfo.name as string}
-          priority
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: '100%', height: 'auto' }}
-        />
-      </div>
-        <div className="w-3/4 flex flex-col">
+      <div className="flex xs:flex-col sm:flex-row xs:items-center sm:items-start">
+        <div className={'flex-1 overflow-hidden xs:mr-0 sm:mr-6'}>
+          <div className="w-full xs:h-[70%] sm:h-auto">
+          <Image
+            src={renderInfo.image as string}
+            alt={renderInfo.name as string}
+            priority
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: '100%', height: '100%' }}
+          />
+          </div>
+        </div>
+        <div className="flex flex-3 flex-col xs:mt-4 sm:mt-0">
           {Object.keys(renderInfo).map((key) => (
             <TextLine
               key={key}
@@ -65,7 +67,6 @@ const CardInfoModal = () => {
             />
           ))}
         </div>
-
       </div>
     </AppModal>
   )
