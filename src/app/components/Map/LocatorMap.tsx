@@ -8,7 +8,7 @@ const LocationMap = () => {
   const memberList = useAppSelector(selectMemberList);
 
   return (
-    <div className="h-80 lg:h-96 w-full">
+    <div className="h-80 lg:h-96 w-full" role="mapcontainer">
       <MapContainer
         center={[0, 0]} 
         zoom={1}
