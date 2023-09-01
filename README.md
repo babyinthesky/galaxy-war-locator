@@ -1,6 +1,15 @@
 # StarWar Rebelion - Locator
 App demo displays markers on a map and a list of data, following the [assignment](https://github.com/aseevia/star-wars-frontend)
 
+Demo supports responsive styles.
+
+## Applied Frameworks or libs
+- Next.js
+- Redux
+- Typescript
+- Tailwind
+- Jest, React testing library 
+
 ## Getting Started
 First install all packages
 
@@ -25,5 +34,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 npm run build
 
 npm run start
+
+```
+
+## Test
+```bash
+npm run test
 
 ```
